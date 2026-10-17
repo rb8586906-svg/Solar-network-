@@ -1,533 +1,269 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>USF SOLAR NETWORK | Dashboard</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USF SOLAR NETWORK</title>
 <style>
-:root {
-  --forest: #073b2a;
-  --green: #087443;
-  --lime: #d9f36a;
-  --bg: #f2f6f2;
-  --ink: #14291f;
-  --muted: #718077;
+:root{
+ --bg:#f2f6fc;--card:#fff;--text:#172238;
+ --muted:#718096;--primary:#1265e8;--line:#e1e8f2;
+ --green:#0b9867;--orange:#ffae20;
 }
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  padding: 0;
-  background:
-    radial-gradient(ellipse at top left, #e1f2e5 0, transparent 40%),
-    var(--bg);
-  color: var(--ink);
-  font-family: "DM Sans", sans-serif;
-}
-
-.page {
-  max-width: 1120px;
-  margin: auto;
-  padding: 24px 18px 45px;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 34px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: Manrope, sans-serif;
-  font-weight: 800;
-  letter-spacing: -.5px;
-}
-
-.brand-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(145deg, #e8ff8b, #b9df42);
-  color: #073b2a;
-  font-size: 27px;
-  box-shadow: 0 7px 18px #9bbd4645;
-}
-
-.brand small {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  margin-top: 3px;
-}
-
-.profile {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  color: white;
-  background: linear-gradient(135deg, #087443, #073b2a);
-  font-weight: 800;
-  box-shadow: 0 5px 15px #073b2a30;
-}
-
-.welcome {
-  margin-bottom: 26px;
-}
-
-.eyebrow {
-  color: #087443;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-h1 {
-  font-family: Manrope, sans-serif;
-  font-size: clamp(27px, 5vw, 39px);
-  letter-spacing: -1.4px;
-  line-height: 1.15;
-  margin: 9px 0;
-}
-
-.welcome p {
-  color: var(--muted);
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* Different AI-style cards */
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 19px;
-}
-
-.card {
-  min-height: 218px;
-  padding: 23px;
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  border-radius: 25px;
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.card-label {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: .2px;
-}
-
-.card-value {
-  font-family: Manrope, sans-serif;
-  font-weight: 800;
-  font-size: clamp(32px, 5vw, 43px);
-  line-height: 1;
-  margin: 24px 0 8px;
-  letter-spacing: -1.5px;
-}
-
-.card-note {
-  font-size: 12px;
-  opacity: .78;
-}
-
-.art {
-  position: absolute;
-  right: 17px;
-  bottom: 13px;
-  font-size: 69px;
-  line-height: 1;
-  opacity: .9;
-  z-index: -1;
-  filter: drop-shadow(0 10px 10px #00000016);
-  transform: rotate(-8deg);
-}
-
-/* 1. Solar project card */
-.projects {
-  color: white;
-  background:
-    radial-gradient(circle at 90% 20%, #4fbc82 0, transparent 33%),
-    linear-gradient(135deg, #0c6541, #063b2a 78%);
-  box-shadow: 0 15px 35px #07563830;
-}
-
-.projects::after {
-  content: "";
-  position: absolute;
-  width: 155px;
-  height: 155px;
-  right: -48px;
-  bottom: -60px;
-  border: 1px solid #ffffff36;
-  border-radius: 35px;
-  transform: rotate(35deg);
-  z-index: -1;
-}
-
-.projects .card-value { color: #e4ff82; }
-
-.mini-tag {
-  border: 1px solid #ffffff50;
-  background: #ffffff13;
-  border-radius: 20px;
-  padding: 6px 9px;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-/* 2. Site card */
-.sites {
-  color: #16372a;
-  background: linear-gradient(140deg, #ffffff, #e0f4e6);
-  border: 1px solid #d4e9d9;
-  box-shadow: 0 14px 30px #154b2a0d;
-}
-
-.sites .card-value { color: #087443; }
-
-.sites .art {
-  font-size: 74px;
-  opacity: .22;
-  filter: none;
-}
-
-.pill {
-  padding: 6px 10px;
-  border-radius: 20px;
-  color: #087443;
-  background: #c9f0d6;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-/* 3. Teams card */
-.teams {
-  color: white;
-  background:
-    radial-gradient(circle at 90% 90%, #316cdb 0, transparent 42%),
-    linear-gradient(135deg, #202b5e, #101936);
-  box-shadow: 0 15px 35px #1c2c622b;
-}
-
-.teams .card-value { color: #b8e6ff; }
-
-.teams .card-label { color: #edf2ff; }
-
-.avatars {
-  display: flex;
-  margin-top: 18px;
-}
-
-.avatar {
-  width: 29px;
-  height: 29px;
-  margin-right: -6px;
-  border: 2px solid #172044;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: #d7f3e2;
-  color: #174b35;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.avatar:nth-child(2) { background: #ffe1b7; }
-.avatar:nth-child(3) { background: #dcd4ff; }
-.avatar:nth-child(4) { background: #c7edff; }
-
-/* 4. Payment card */
-.payments {
-  background: linear-gradient(145deg, #fff8e8, #f7e5b9);
-  border: 1px solid #f0dfb5;
-  color: #4a3511;
-  box-shadow: 0 14px 30px #88601a12;
-}
-
-.payments .card-value { color: #9b6812; }
-
-.payments .art {
-  font-size: 70px;
-  opacity: .24;
-  filter: none;
-}
-
-.progress-track {
-  height: 7px;
-  background: #e4d2a9;
-  border-radius: 20px;
-  margin-top: 18px;
-  overflow: hidden;
-  max-width: 72%;
-}
-
-.progress-fill {
-  width: 0%;
-  height: 100%;
-  border-radius: 20px;
-  background: linear-gradient(90deg, #c08b23, #e8bd4d);
-  transition: width .4s ease;
-}
-
-.card-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 13px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font-size: 12px;
-  font-weight: 800;
-  min-height: 25px;
-  cursor: pointer;
-}
-
-.quick-title {
-  font: 800 19px Manrope, sans-serif;
-  margin: 32px 0 14px;
-}
-
-.quick-actions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.quick-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 15px;
-  min-height: 70px;
-  border-radius: 16px;
-  background: white;
-  border: 1px solid #e0e9e1;
-  box-shadow: 0 5px 18px #173e2208;
-  color: var(--forest);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.quick-icon {
-  display: grid;
-  place-items: center;
-  flex: 0 0 39px;
-  width: 39px;
-  height: 39px;
-  border-radius: 12px;
-  background: #e6f5e9;
-  font-size: 20px;
-}
-
-footer {
-  text-align: center;
-  color: #87948b;
-  font-size: 11px;
-  margin-top: 35px;
-}
-
-@media (max-width: 560px) {
-  .page { padding: 18px 13px 32px; }
-  .topbar { margin-bottom: 27px; }
-  .brand-icon { width: 42px; height: 42px; }
-  .dashboard { gap: 11px; }
-  .card {
-    min-height: 195px;
-    padding: 15px;
-    border-radius: 20px;
-  }
-  .card-label { font-size: 11px; }
-  .card-value { font-size: 32px; margin-top: 25px; }
-  .card-note { font-size: 10px; }
-  .art { right: 7px; bottom: 10px; font-size: 50px; }
-  .mini-tag, .pill { font-size: 9px; padding: 5px 7px; }
-  .progress-track { max-width: 95%; }
-  .quick-actions { grid-template-columns: 1fr; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+body.dark{--bg:#101827;--card:#1c293b;--text:#f4f7ff;--muted:#b6c2d5;--line:#344359}
+button,input,select,textarea{font:inherit}
+button{border:0;border-radius:10px;padding:11px 15px;background:var(--primary);color:white;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(.92)}
+.secondary{background:#e5edfa;color:#174b95}
+.danger{background:#d93646;color:white}
+.green{background:var(--green);color:white}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);margin:6px 0 13px}
+textarea{min-height:85px}
+label{font-size:13px;font-weight:bold}
+h2{font-size:22px;margin:8px 0 16px}
+h3{font-size:17px}
+p{line-height:1.5}
+.muted{color:var(--muted);font-size:13px}
+.hidden{display:none!important}
+.wrap{max-width:1200px;margin:auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);padding:18px;border-radius:16px;margin-bottom:15px;box-shadow:0 4px 18px #152c5008}
+.brand{font-size:24px;font-weight:900;letter-spacing:.5px}
+.brand span{color:var(--orange)}
+.auth{max-width:430px;margin:6vh auto}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px}
+.stat strong{display:block;font-size:26px;margin-top:8px}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.top{max-width:1200px;margin:auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+nav{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+nav button{background:var(--card);color:var(--text);border:1px solid var(--line);padding:9px 12px}
+nav button.active{background:var(--primary);color:white}
+.item{padding:13px;border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow-wrap:anywhere}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.row button{margin:3px 0}
+.tag{background:#d9f8e9;color:#116844;padding:5px 9px;border-radius:20px;font-size:12px}
+.preview{max-width:100%;max-height:350px;object-fit:contain;border-radius:12px;background:#e8edf6}
+.banner{min-height:230px;border-radius:15px;padding:25px;color:white;background:linear-gradient(120deg,#07316a,#079b8c);background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:center}
+.banner h1{font-size:clamp(26px,6vw,44px);margin:0}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+@media(max-width:650px){
+ .wrap{padding:10px}.card{padding:13px}.grid{grid-template-columns:1fr}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .brand{font-size:18px}.top{align-items:flex-start}
 }
 </style>
 </head>
-
 <body>
-<div class="page">
 
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-icon">☀</div>
-      <div>
-        USF SOLAR NETWORK
-        <small>PARTNER DASHBOARD</small>
-      </div>
-    </div>
-    <div class="profile" aria-label="Partner profile">U</div>
-  </header>
+<!-- LOGIN / REGISTER -->
+<section id="authScreen" class="wrap">
+ <div class="card auth">
+  <div class="brand">USF <span>SOLAR</span></div>
+  <p class="muted">NETWORK • SMART SOLAR MANAGEMENT</p>
+  <h2 id="authTitle">Welcome Back!</h2>
+  <div class="row">
+   <button onclick="showAuth('login')" id="loginTab">Login</button>
+   <button class="secondary" onclick="showAuth('register')" id="registerTab">Create Account</button>
+  </div>
+  <form id="authForm">
+   <div id="nameBox" class="hidden">
+    <label>पूरा नाम</label>
+    <input id="authName" placeholder="अपना नाम लिखें">
+   </div>
+   <label>Email</label>
+   <input id="authEmail" type="email" required placeholder="Email address">
+   <label>Password</label>
+   <input id="authPassword" type="password" minlength="6" required placeholder="कम से कम 6 अक्षर">
+   <button style="width:100%" id="authButton">Login</button>
+  </form>
+  <p class="muted">नोट: यह शुरुआती डेमो लॉगिन है। असली सुरक्षित ऑनलाइन अकाउंट के लिए Firebase Authentication सेट करना होगा।</p>
+  <p id="authMessage" class="muted"></p>
+ </div>
+</section>
 
-  <section class="welcome">
-    <div class="eyebrow">☀ Solar Partner Portal</div>
-    <h1>Build your solar network.</h1>
-    <p>Manage projects, sites, installation teams and payments in one place.</p>
-  </section>
+<!-- MAIN APP -->
+<div id="app" class="hidden">
+<header>
+ <div class="top">
+  <div>
+   <div class="brand">USF <span>SOLAR</span> NETWORK</div>
+   <small id="welcome" class="muted"></small>
+  </div>
+  <div class="row">
+   <button class="secondary" onclick="toggleTheme()">◐ Theme</button>
+   <button class="danger" onclick="logout()">Logout</button>
+  </div>
+ </div>
+</header>
 
-  <section class="dashboard">
+<main class="wrap">
+<nav id="mainNav">
+ <button class="active" data-page="dashboard">🏠 Dashboard</button>
+ <button data-page="projects">☀️ Projects</button>
+ <button data-page="teams">👷 Teams</button>
+ <button data-page="payments">₹ Payments</button>
+ <button data-page="studio">📸 AI Photo Box</button>
+ <button data-page="banner">🎨 Banner Maker</button>
+ <button data-page="reports">📊 Reports</button>
+ <button data-page="profile">⚙️ Profile</button>
+</nav>
 
-    <article class="card projects">
-      <div class="card-top">
-        <span class="card-label">Total Projects</span>
-        <span class="mini-tag">OVERVIEW</span>
-      </div>
-      <div class="card-value" id="totalProjects">0</div>
-      <div class="card-note">Projects registered in your account</div>
-      <div class="art" aria-hidden="true">☀</div>
-      <button class="card-link" onclick="showInfo('Projects')">
-        View projects <span>↗</span>
-      </button>
-    </article>
+<!-- DASHBOARD -->
+<section id="dashboard" class="page">
+ <div class="card">
+  <h2>Welcome to USF SOLAR NETWORK ☀️</h2>
+  <p class="muted">अपने प्रोजेक्ट, इंस्टॉलेशन टीम, पेमेंट और मार्केटिंग को एक जगह मैनेज करें।</p>
+  <div class="row">
+   <button onclick="go('projects')">+ नया प्रोजेक्ट</button>
+   <button class="secondary" onclick="go('teams')">+ नई टीम</button>
+   <button class="secondary" onclick="go('studio')">फोटो और कैप्शन</button>
+  </div>
+ </div>
 
-    <article class="card sites">
-      <div class="card-top">
-        <span class="card-label">Total Sites</span>
-        <span class="pill">SITE MAP</span>
-      </div>
-      <div class="card-value" id="totalSites">0</div>
-      <div class="card-note">Project locations added</div>
-      <div class="art" aria-hidden="true">⌖</div>
-      <button class="card-link" onclick="showInfo('Sites')">
-        Explore sites <span>↗</span>
-      </button>
-    </article>
+ <div class="stats">
+  <div class="stat">कुल प्रोजेक्ट<strong id="totalProjects">0</strong></div>
+  <div class="stat">पूरे हुए काम<strong id="completedProjects">0</strong></div>
+  <div class="stat">कुल कॉन्ट्रैक्ट<strong id="totalAmount">₹0</strong></div>
+  <div class="stat">बाकी पेमेंट<strong id="totalDue">₹0</strong></div>
+ </div>
 
-    <article class="card teams">
-      <div class="card-top">
-        <span class="card-label">Available Teams</span>
-        <span class="mini-tag">NETWORK</span>
-      </div>
-      <div class="card-value" id="availableTeams">0</div>
-      <div class="card-note">Installation teams in your directory</div>
-      <div class="avatars" aria-label="Team illustration">
-        <span class="avatar">S</span>
-        <span class="avatar">P</span>
-        <span class="avatar">E</span>
-        <span class="avatar">+</span>
-      </div>
-      <button class="card-link" onclick="showInfo('Teams')">
-        Find teams <span>↗</span>
-      </button>
-    </article>
+ <div class="card" style="margin-top:15px">
+  <h3>📋 हाल के प्रोजेक्ट</h3>
+  <div id="recentProjects"></div>
+ </div>
 
-    <article class="card payments">
-      <div class="card-top">
-        <span class="card-label">Pending Payments</span>
-        <span class="pill">INR ₹</span>
-      </div>
-      <div class="card-value" id="pendingPayments">₹0</div>
-      <div class="card-note">Outstanding project amount</div>
-      <div class="progress-track">
-        <div class="progress-fill" id="paymentProgress"></div>
-      </div>
-      <button class="card-link" onclick="showInfo('Payments')">
-        Payment details <span>↗</span>
-      </button>
-    </article>
+ <div class="card">
+  <h3>⚡ Quick Actions</h3>
+  <div class="grid">
+   <button onclick="go('projects')">प्रोजेक्ट मैनेज करें</button>
+   <button onclick="go('payments')">पेमेंट रिकॉर्ड करें</button>
+   <button onclick="go('banner')">बैनर बनाएं</button>
+   <button onclick="go('reports')">रिपोर्ट डाउनलोड करें</button>
+  </div>
+ </div>
+</section>
 
-  </section>
+<!-- भाग 2 का कोड यहाँ आएगा -->
 
-  <h2 class="quick-title">Quick Actions</h2>
+<!-- भाग 3 का कोड यहाँ आएगा -->
 
-  <section class="quick-actions">
-    <a class="quick-btn" href="#" onclick="showInfo('New Project');return false;">
-      <span class="quick-icon">＋</span>
-      <span>Add New Project</span>
-    </a>
-    <a class="quick-btn" href="#" onclick="showInfo('My Projects');return false;">
-      <span class="quick-icon">▦</span>
-      <span>My Projects</span>
-    </a>
-    <a class="quick-btn" href="#" onclick="showInfo('Find Contractors');return false;">
-      <span class="quick-icon">♧</span>
-      <span>Find Contractors</span>
-    </a>
-    <a class="quick-btn" href="#" onclick="showInfo('Reports');return false;">
-      <span class="quick-icon">▤</span>
-      <span>Project Reports</span>
-    </a>
-  </section>
-
-  <footer>
-    © USF SOLAR NETWORK · PARTNER PORTAL
-  </footer>
-
+</main>
+<footer>USF SOLAR NETWORK • Clean Energy • Professional Installation</footer>
 </div>
 
 <script>
-function showInfo(section) {
-  alert(section + " section selected. Connect this button to your project pages.");
+// APP DATA
+const DATA_KEY="usf_network_data_v1";
+const USERS_KEY="usf_network_users_v1";
+const SESSION_KEY="usf_network_session_v1";
+const PROFILE_KEY="usf_network_profile_v1";
+
+const $=id=>document.getElementById(id);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const money=n=>"₹"+(Number(n)||0).toLocaleString("en-IN");
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function loadData(){
+ try{return JSON.parse(localStorage.getItem(DATA_KEY))||{projects:[],teams:[],payments:[]}}
+ catch(e){return {projects:[],teams:[],payments:[]}}
+}
+let data=loadData();
+let authMode="login";
+let photoURL="",bannerURL="";
+
+function saveData(){
+ localStorage.setItem(DATA_KEY,JSON.stringify(data));
+ if(typeof refreshAll==="function")refreshAll();
 }
 
-/*
-  Demo data only.
-  Replace these values with data loaded securely from Firestore.
-*/
-function updateDashboard(data) {
-  document.getElementById("totalProjects").textContent =
-    Number(data.totalProjects || 0);
-
-  document.getElementById("totalSites").textContent =
-    Number(data.totalSites || 0);
-
-  document.getElementById("availableTeams").textContent =
-    Number(data.availableTeams || 0);
-
-  const pending = Number(data.pendingPayments || 0);
-
-  document.getElementById("pendingPayments").textContent =
-    new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0
-    }).format(pending);
+function showAuth(mode){
+ authMode=mode;
+ $("authTitle").textContent=mode==="login"?"Welcome Back!":"Create Your Account";
+ $("authButton").textContent=mode==="login"?"Login":"Register";
+ $("nameBox").classList.toggle("hidden",mode!=="register");
+ $("loginTab").className=mode==="login"?"":"secondary";
+ $("registerTab").className=mode==="register"?"":"secondary";
+ $("authMessage").textContent="";
 }
 
-/* Initial display */
-updateDashboard({
-  totalProjects: 0,
-  totalSites: 0,
-  availableTeams: 0,
-  pendingPayments: 0
+function getUsers(){
+ try{return JSON.parse(localStorage.getItem(USERS_KEY))||[]}
+ catch(e){return []}
+}
+
+$("authForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const email=$("authEmail").value.trim().toLowerCase();
+ const password=$("authPassword").value;
+ let users=getUsers();
+
+ if(authMode==="register"){
+  const name=$("authName").value.trim();
+  if(!name){$("authMessage").textContent="अपना नाम लिखें।";return}
+  if(users.some(u=>u.email===email)){
+   $("authMessage").textContent="यह Email पहले से रजिस्टर है।";return
+  }
+  const user={id:uid(),name,email,password};
+  users.push(user);
+  localStorage.setItem(USERS_KEY,JSON.stringify(users));
+  localStorage.setItem(SESSION_KEY,JSON.stringify({name,email}));
+  startApp({name,email});
+ }else{
+  const user=users.find(u=>u.email===email&&u.password===password);
+  if(!user){$("authMessage").textContent="Email या Password गलत है। पहले Register करें।";return}
+  localStorage.setItem(SESSION_KEY,JSON.stringify({name:user.name,email:user.email}));
+  startApp(user);
+ }
 });
+
+function startApp(user){
+ $("authScreen").classList.add("hidden");
+ $("app").classList.remove("hidden");
+ $("welcome").textContent="नमस्ते, "+(user.name||user.email);
+ $("authMessage").textContent="";
+ if(typeof loadProfile==="function")loadProfile();
+ if(typeof refreshAll==="function")refreshAll();
+ go("dashboard");
+}
+
+function logout(){
+ localStorage.removeItem(SESSION_KEY);
+ $("app").classList.add("hidden");
+ $("authScreen").classList.remove("hidden");
+ $("authForm").reset();
+}
+
+function go(page){
+ document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+ const target=$(page);
+ if(target)target.classList.remove("hidden");
+ document.querySelectorAll("#mainNav button").forEach(b=>{
+  b.classList.toggle("active",b.dataset.page===page);
+ });
+ window.scrollTo(0,0);
+}
+
+$("mainNav").addEventListener("click",e=>{
+ const b=e.target.closest("button[data-page]");
+ if(b)go(b.dataset.page);
+});
+
+function toggleTheme(){
+ document.body.classList.toggle("dark");
+ localStorage.setItem("usf_network_dark",document.body.classList.contains("dark")?"1":"0");
+}
+
+if(localStorage.getItem("usf_network_dark")==="1")document.body.classList.add("dark");
+
+try{
+ const session=JSON.parse(localStorage.getItem(SESSION_KEY)||"null");
+ if(session)startApp(session);
+}catch(e){}
+showAuth("login");
 </script>
 </body>
-  </html>
+</html>
